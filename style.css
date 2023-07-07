@@ -1,0 +1,15 @@
+    h1
+    {
+        color: rgb(255, 211, 157);
+        text-align: center; 
+    }
+    p
+    {
+        color: bisque;
+        text-align: center; 
+        font-size: 22px;
+    }
+    hr
+    {
+        color: rgb(88, 88, 88);
+    }

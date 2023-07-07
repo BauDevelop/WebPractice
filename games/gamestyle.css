@@ -1,0 +1,17 @@
+@media (min-device-width: 768px) {
+    .canvas
+    {
+        background: rgb(17, 21, 22);
+        width: 25vw;
+        height: 25vw;
+    }
+}
+
+@media (max-device-width: 768px) {
+    .canvas
+    {
+        background: rgb(17, 21, 22);
+        width: 100%;
+        height: 100vw;
+    }
+}
