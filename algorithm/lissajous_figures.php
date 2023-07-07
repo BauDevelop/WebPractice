@@ -6,7 +6,7 @@
         <meta charset="utf-8">
     </head>
     <body>
-        <?php $root = $_SERVER['DOCUMENT_ROOT']; include $root.'/miragesite/mainmenu.html'; ?>
+        <?php $root = $_SERVER['DOCUMENT_ROOT']; include $root.'/webpractice/mainmenu.html'; ?>
         <canvas id="myCanvas" width="500" height="500"></canvas> 
         <script src="lissajous_figures.js"></script>
         <button onmousedown="DownChangeVar(1)">-</button>
