@@ -1,15 +1,26 @@
 <!DOCTYPE html>
-<html onmouseup="UpChangeVar(1)">
+<html>
     <head>
         <title>Фигуры Лиссажу</title>
+        <link rel="stylesheet" href="../style.css">
         <link rel="stylesheet" href="../mainmenustyle.css">
         <meta charset="utf-8">
     </head>
     <body>
         <?php $root = $_SERVER['DOCUMENT_ROOT']; include $root.'/webpractice/mainmenu.html'; ?>
         <canvas id="myCanvas" width="500" height="500"></canvas> 
+        <hr>
+        <label>Частота А</label>
+        <input type="number" id="freq1" step="1" value="1.0" size="5">
+
+        <label>Частота B</label>
+        <input type="number" id="freq2" step="1" value="2.0" size="5">
+
+        <label>Сдвиг фаз</label>
+        <input type="number" id="phase" step="0.01" value="0.0" size="5">
+
+        <label id="label">Coord</label>
+
         <script src="lissajous_figures.js"></script>
-        <button onmousedown="DownChangeVar(1)">-</button>
-        <button onmousedown="DownChangeVar(2)">+</button>
     </body>
 </html>
