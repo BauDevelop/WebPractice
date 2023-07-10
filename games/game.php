@@ -8,7 +8,9 @@
     </head>
     <body>
         <?php $root = $_SERVER['DOCUMENT_ROOT']; include $root.'/webpractice/mainmenu.html'; ?>
-        <canvas onclick="OnClick()" onmousemove="OnMouse(event)" class="canvas" id="canvas">Ваш браузер не поддерживает JavaScript и HTML5!</canvas>
-        <script src="game.js"></script>
+        <div align="center">
+            <canvas onclick="OnClick()" onmousemove="OnMouse(event)" class="canvas" id="canvas">Ваш браузер не поддерживает JavaScript и HTML5!</canvas>
+            <script src="game.js"></script>
+        </div>
     </body>
 </html>
