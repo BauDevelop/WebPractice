@@ -12,7 +12,7 @@ function Start()
 function Update()
 { 
   const startTime = performance.now();
-  t += 0.015;
+  t += 0.005;
   if (t > Math.PI * 2) t = 0;
   freq1 = Number(document.getElementById("freq1").value);
   freq2 = Number(document.getElementById("freq2").value);
@@ -28,14 +28,28 @@ function Update()
 function DrawGrid() 
 {
   ctx.fillStyle="#FFFFFF";
-  ctx.fillRect(0, 0, 500, 500);
   ctx.strokeStyle="#000";
+
+  ctx.fillRect(0, 0, 500, 500);
   ctx.beginPath();
     ctx.moveTo(0, 250); 
     ctx.lineTo(500, 250);
   ctx.closePath();
     ctx.moveTo(250, 0);
     ctx.lineTo(250, 500);
+  ctx.closePath();
+  ctx.stroke();
+
+  ctx.strokeStyle="#FF1F1F";
+  ctx.beginPath();
+    ctx.moveTo(calculateLissFigX(t, range, 375), 250); 
+    ctx.lineTo(calculateLissFigX(t, range, 375), calculateLissFigY(t, range, 375));
+  ctx.closePath();
+  ctx.stroke();
+
+  ctx.beginPath();
+    ctx.moveTo(250, calculateLissFigY(t, range, 375)); 
+    ctx.lineTo(calculateLissFigX(t, range, 375), calculateLissFigY(t, range, 375));
   ctx.closePath();
   ctx.stroke();
 }
@@ -47,7 +61,7 @@ function DrawFigure()
 
   for (let i = 0; i <= Math.PI*2; i += 1 / 1000)
   {
-    putPixel(calculateLissFigX(i, range, 125), calculateLissFigY(i, range, 125), color, image.data);
+    putPixel(calculateLissFigX(i, range, 375), calculateLissFigY(i, range, 375), color, image.data);
     putPixel(i * (250 / (Math.PI * 2)), calculateLissFigY(i+t, range, 375), color, image.data);
     putPixel(calculateLissFigX(i+t, range, 375), i * (250 / (Math.PI * 2)), color, image.data);
   }
