@@ -1,19 +1,37 @@
-    body
+body
+{
+    color: rgb(255, 211, 157);
+        
+}
+h1
+{
+    color: rgb(255, 211, 157);
+    text-align: center; 
+}
+p
+{
+    color: bisque;
+    text-align: center; 
+    font-size: 22px;
+}
+hr
+{
+    color: rgb(88, 88, 88);
+}
+@media (min-device-width: 768px) {
+    .canvas
     {
-        color: rgb(255, 211, 157);
+        background: rgb(17, 21, 22);
+        width: 25vw;
+        height: 25vw;
     }
-    h1
+}
+
+@media (max-device-width: 768px) {
+    .canvas
     {
-        color: rgb(255, 211, 157);
-        text-align: center; 
+        background: rgb(17, 21, 22);
+        width: 100%;
+        height: 100vw;
     }
-    p
-    {
-        color: bisque;
-        text-align: center; 
-        font-size: 22px;
-    }
-    hr
-    {
-        color: rgb(88, 88, 88);
-    }
+}

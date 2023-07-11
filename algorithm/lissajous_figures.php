@@ -10,7 +10,7 @@
         
         <?php $root = $_SERVER['DOCUMENT_ROOT']; include $root.'/webpractice/mainmenu.html'; ?>
         <div align="center">
-            <canvas id="myCanvas" width="500" height="500"></canvas> 
+            <canvas class="canvas" id="myCanvas" width="500" height="500"></canvas> 
             <hr>
             <label>Частота А</label>
             <input type="number" id="freq1" step="1" value="1.0" style="width:50px">

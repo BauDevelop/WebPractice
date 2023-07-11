@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>JS Game</title>
-        <link rel="stylesheet" href="gamestyle.css">
+        <link rel="stylesheet" href="../style.css">
         <link rel="stylesheet" href="../mainmenustyle.css">
         <meta charset="utf-8">
     </head>
