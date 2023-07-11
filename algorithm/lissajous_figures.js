@@ -28,30 +28,26 @@ function Update()
 function DrawGrid() 
 {
   ctx.fillStyle="#FFFFFF";
-  ctx.strokeStyle="#000";
-
   ctx.fillRect(0, 0, 500, 500);
-  ctx.beginPath();
-    ctx.moveTo(0, 250); 
-    ctx.lineTo(500, 250);
-  ctx.closePath();
-    ctx.moveTo(250, 0);
-    ctx.lineTo(250, 500);
-  ctx.closePath();
-  ctx.stroke();
+  
 
-  ctx.strokeStyle="#FF1F1F";
-  ctx.beginPath();
-    ctx.moveTo(calculateLissFigX(t, range, 375), 250); 
-    ctx.lineTo(calculateLissFigX(t, range, 375), calculateLissFigY(t, range, 375));
-  ctx.closePath();
-  ctx.stroke();
+  const DrawLine = (startX, startY, endX, endY, context, color) => {
+    context.strokeStyle = color;
+    context.beginPath();
+      context.moveTo(startX, startY); 
+      context.lineTo(endX, endY);
+    context.closePath();
+    context.stroke();
+  };
 
-  ctx.beginPath();
-    ctx.moveTo(250, calculateLissFigY(t, range, 375)); 
-    ctx.lineTo(calculateLissFigX(t, range, 375), calculateLissFigY(t, range, 375));
-  ctx.closePath();
-  ctx.stroke();
+  DrawLine(0, 250, 500, 250, ctx, "#303030");
+  DrawLine(250, 0, 250, 500, ctx, "#303030");
+
+  DrawLine(calculateLissFigX(t, range, 375), 250, 
+           calculateLissFigX(t, range, 375), calculateLissFigY(t, range, 375), ctx, "#FF1F1F");
+
+  DrawLine(250, calculateLissFigY(t, range, 375), 
+           calculateLissFigX(t, range, 375), calculateLissFigY(t, range, 375), ctx, "#FF1F1F");
 }
 
 function DrawFigure() 
