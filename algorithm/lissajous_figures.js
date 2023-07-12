@@ -1,6 +1,6 @@
 let canvas = document.getElementById("myCanvas");
 let ctx = canvas.getContext("2d");
-let freq1 = 2, freq2 = 3, phase, t = 0, range = 115;
+let freq1 = 2, freq2 = 3, phase, t = 0, range = 115, rate = 1 / 100;
 
 Start();
 
@@ -19,7 +19,7 @@ function Update()
   phase = Number(document.getElementById("phase").value);
   
   DrawGrid();
-  DrawFigure();
+  //DrawFigure();
   const endTime = performance.now();
   let num = endTime - startTime;
   document.getElementById("label").innerText = "Время одного кадра = " + String(Math.trunc(num)) + " ms.";
@@ -29,48 +29,44 @@ function DrawGrid()
 {
   ctx.fillStyle="#FFFFFF";
   ctx.fillRect(0, 0, 500, 500);
-  
 
+  ctx.beginPath();
   const DrawLine = (startX, startY, endX, endY, context, color) => {
     context.strokeStyle = color;
-    context.beginPath();
       context.moveTo(startX, startY); 
       context.lineTo(endX, endY);
-    context.closePath();
-    context.stroke();
   };
 
   DrawLine(0, 250, 500, 250, ctx, "#303030");
   DrawLine(250, 0, 250, 500, ctx, "#303030");
+  ctx.stroke();
 
   DrawLine(calculateLissFigX(t, range, 375), 250, 
-           calculateLissFigX(t, range, 375), calculateLissFigY(t, range, 375), ctx, "#FF1F1F");
+           calculateLissFigX(t, range, 375), calculateLissFigY(t, range, 375), ctx, "#FF0000");
 
   DrawLine(250, calculateLissFigY(t, range, 375), 
-           calculateLissFigX(t, range, 375), calculateLissFigY(t, range, 375), ctx, "#FF1F1F");
-}
-
-function DrawFigure() 
-{   
-  let image = ctx.getImageData(0, 0, canvas.width, canvas.height);
-  let color = {r: 0, g: 0, b: 0, a: 255};
-
-  for (let i = 0; i <= Math.PI*2; i += 1 / 1000)
+           calculateLissFigX(t, range, 375), calculateLissFigY(t, range, 375), ctx, "#FF0000");
+  ctx.stroke();
+  ctx.strokeStyle = "#000";
+  ctx.moveTo(calculateLissFigX(0, range, 375), calculateLissFigY(0, range, 375)); 
+  for (let i = 0; i <= Math.PI*2 + rate; i += rate)
   {
-    putPixel(calculateLissFigX(i, range, 375), calculateLissFigY(i, range, 375), color, image.data);
-    putPixel(i * (250 / (Math.PI * 2)), calculateLissFigY(i+t, range, 375), color, image.data);
-    putPixel(calculateLissFigX(i+t, range, 375), i * (250 / (Math.PI * 2)), color, image.data);
+    ctx.lineTo(calculateLissFigX(i, range, 375), calculateLissFigY(i, range, 375));
   }
-  ctx.putImageData(image, 0, 0);
-}
 
-function putPixel(x, y, color, data) 
-{
-  let index = 4 * (canvas.width * Math.round(y) + Math.round(x));
-  data[index] = color.r;
-  data[index + 1] = color.g;
-  data[index + 2] = color.b;
-  data[index + 3] = color.a;
+  ctx.moveTo(0, calculateLissFigY(t, range, 375)); 
+  for (let i = 0; i <= Math.PI*2 + rate; i += rate)
+  {
+    ctx.lineTo(i * (250 / (Math.PI * 2)), calculateLissFigY(i+t, range, 375));
+  }
+
+  ctx.moveTo(calculateLissFigX(t, range, 375), 0); 
+  for (let i = 0; i <= Math.PI*2 + rate; i += rate)
+  {
+    ctx.lineTo(calculateLissFigX(i+t, range, 375), i * (250 / (Math.PI * 2)));
+  }
+
+  ctx.stroke();
 }
 
 function calculateLissFigX(time, amplitude, offset) 
