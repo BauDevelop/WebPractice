@@ -1,80 +1,81 @@
-let canvas = document.getElementById("myCanvas");
-let ctx = canvas.getContext("2d");
-let freq1 = 2, freq2 = 3, phase, t = 0, range = 115, rate = 1 / 100;
+let canvas = document.getElementById("myCanvas")
+let ctx = canvas.getContext("2d")
+let freq1 = 2, freq2 = 3, phase, t = 0, range = 115, range2 = 65, rate = 1 / 100
 
-Start();
+var screenImg = new Image();
+screenImg.src = "oscillograph.png"; 
+
+
+Start()
 
 function Start()
 {
-    timer = setInterval(Update, 1000 / 60);
+  setInterval(Update, 1000 / 60)
 }
 
 function Update()
 { 
-  const startTime = performance.now();
-  t += 0.005;
-  if (t > Math.PI * 2) t = 0;
-  freq1 = Number(document.getElementById("freq1").value);
-  freq2 = Number(document.getElementById("freq2").value);
-  phase = Number(document.getElementById("phase").value);
-  
-  DrawGrid();
-  //DrawFigure();
-  const endTime = performance.now();
-  let num = endTime - startTime;
-  document.getElementById("label").innerText = "Время одного кадра = " + String(Math.trunc(num)) + " ms.";
+  t += 0.005
+  if (t > Math.PI * 2) t = 0
+  freq1 = Number(document.getElementById("freq1").value)
+  freq2 = Number(document.getElementById("freq2").value)
+  phase = Number(document.getElementById("phase").value)
+
+  const startTime = performance.now()
+    Draw()
+  const frameTime = (performance.now() - startTime).toFixed(2)
+  document.getElementById("label").innerText = "Время одного кадра = " + String(frameTime) + " ms."
 }
 
-function DrawGrid() 
+function Draw() 
 {
-  ctx.fillStyle="#FFFFFF";
-  ctx.fillRect(0, 0, 500, 500);
+  //ctx.clearRect(0, 0, 500, 500)
+  ctx.drawImage(screenImg, 0, 0)
 
-  ctx.beginPath();
-  const DrawLine = (startX, startY, endX, endY, context, color) => {
-    context.strokeStyle = color;
-      context.moveTo(startX, startY); 
-      context.lineTo(endX, endY);
+  const DrawLine = (startX, startY, endX, endY, context, color, width = 1) => {
+    context.lineWidth = width
+    context.strokeStyle = color
+      context.moveTo(startX, startY)
+      context.lineTo(endX, endY)
   };
 
-  DrawLine(0, 250, 500, 250, ctx, "#303030");
-  DrawLine(250, 0, 250, 500, ctx, "#303030");
-  ctx.stroke();
+  ctx.beginPath()
+  DrawLine(calculateLissFigX(t, range, 425), 300, 
+           calculateLissFigX(t, range, 425), calculateLissFigY(t, range, 425), ctx, "red")
 
-  DrawLine(calculateLissFigX(t, range, 375), 250, 
-           calculateLissFigX(t, range, 375), calculateLissFigY(t, range, 375), ctx, "#FF0000");
+  DrawLine(300, calculateLissFigY(t, range, 425), 
+           calculateLissFigX(t, range, 425), calculateLissFigY(t, range, 425), ctx, "red")
+  ctx.stroke()
 
-  DrawLine(250, calculateLissFigY(t, range, 375), 
-           calculateLissFigX(t, range, 375), calculateLissFigY(t, range, 375), ctx, "#FF0000");
-  ctx.stroke();
-  ctx.strokeStyle = "#000";
-  ctx.moveTo(calculateLissFigX(0, range, 375), calculateLissFigY(0, range, 375)); 
+  ctx.beginPath()
+  ctx.strokeStyle = "#90FF90"
+  ctx.lineWidth = 1
+  ctx.moveTo(calculateLissFigX(0, range, 425), calculateLissFigY(0, range, 425));
   for (let i = 0; i <= Math.PI*2 + rate; i += rate)
   {
-    ctx.lineTo(calculateLissFigX(i, range, 375), calculateLissFigY(i, range, 375));
+    ctx.lineTo(calculateLissFigX(i, range, 425), calculateLissFigY(i, range, 425))
   }
 
-  ctx.moveTo(0, calculateLissFigY(t, range, 375)); 
+  ctx.moveTo(50, calculateLissFigY(t, range, 425))
   for (let i = 0; i <= Math.PI*2 + rate; i += rate)
   {
-    ctx.lineTo(i * (250 / (Math.PI * 2)), calculateLissFigY(i+t, range, 375));
+    ctx.lineTo(i * (250 / (Math.PI * 2)) + 50, calculateLissFigY(i+t, range, 425))
   }
 
-  ctx.moveTo(calculateLissFigX(t, range, 375), 0); 
+  ctx.moveTo(calculateLissFigX(t, range, 425), 50)
   for (let i = 0; i <= Math.PI*2 + rate; i += rate)
   {
-    ctx.lineTo(calculateLissFigX(i+t, range, 375), i * (250 / (Math.PI * 2)));
+    ctx.lineTo(calculateLissFigX(i+t, range, 425), i * (250 / (Math.PI * 2)) + 50)
   }
-
-  ctx.stroke();
+  ctx.stroke()
 }
 
 function calculateLissFigX(time, amplitude, offset) 
 {
-  return amplitude * Math.sin(freq1 * time + phase) + offset;
+  return amplitude * Math.sin(freq1 * time + phase) + offset
 }
 
 function calculateLissFigY(time, amplitude, offset) 
 {
-  return amplitude * Math.sin(freq2 * time) + offset;
+  return amplitude * Math.sin(freq2 * time) + offset
 }
