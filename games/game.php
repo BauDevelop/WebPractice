@@ -7,7 +7,7 @@
         <meta charset="utf-8">
     </head>
     <body>
-        <?php $root = $_SERVER['DOCUMENT_ROOT']; include $root.'/webpractice/mainmenu.html'; ?>
+        <?php $root = $_SERVER['DOCUMENT_ROOT']; include $root.'/mainmenu.html'; ?>
         <div align="center">
             <canvas onclick="OnClick()" onmousemove="OnMouse(event)" class="canvas" id="canvas">Ваш браузер не поддерживает JavaScript и HTML5!</canvas>
             <script src="game.js"></script>

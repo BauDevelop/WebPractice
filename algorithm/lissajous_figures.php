@@ -8,7 +8,7 @@
     </head>
     <body>
         
-        <?php $root = $_SERVER['DOCUMENT_ROOT']; include $root.'/webpractice/mainmenu.html'; ?>
+        <?php $root = $_SERVER['DOCUMENT_ROOT']; include $root.'/mainmenu.html'; ?>
         <div align="center">
             <canvas class="canvas" id="myCanvas" width="600" height="600"></canvas> 
             <hr>

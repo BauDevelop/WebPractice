@@ -29,14 +29,13 @@ function Update()
 
 function Draw() 
 {
-  //ctx.clearRect(0, 0, 500, 500)
   ctx.drawImage(screenImg, 0, 0)
 
-  const DrawLine = (startX, startY, endX, endY, context, color, width = 1) => {
-    context.lineWidth = width
-    context.strokeStyle = color
-      context.moveTo(startX, startY)
-      context.lineTo(endX, endY)
+  const DrawLine = (startX, startY, endX, endY, arg_context, color, width = 1) => {
+    arg_context.lineWidth = width
+    arg_context.strokeStyle = color
+    arg_context.moveTo(startX, startY)
+    arg_context.lineTo(endX, endY)
   };
 
   ctx.beginPath()
